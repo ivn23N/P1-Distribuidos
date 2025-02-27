@@ -1,3 +1,5 @@
+#Fork de Ivan Garcia-Diego P1-Distribuidos
+
 ###########################
 #	Improved version of "Build your own blockchain from scratch in 20 lines of Ruby!"	
 #		from https://github.com/openblockchains/awesome-blockchains/tree/master/blockchain.rb
@@ -11,10 +13,10 @@
 #
 #	This Blockchain can be set as a loop for infinite using of the Blockchain.
 #
-#
+# 
 #  to run use:
 #    $ ruby ./blockchain.rb
-#
+#  C:\P1-Distribuidos\simple-blockchain-in-ruby ./blockchain.rb
 #
 #
 
@@ -39,10 +41,11 @@ LEDGER = []
 def create_first_block
 	i = 0
 	instance_variable_set( "@b#{i}", 
-												 Block.first( 
-													{ from: "Dutchgrown", to: "Vincent", what: "Tulip Bloemendaal Sunset", qty: 10 },
-													{ from: "Keukenhof", to: "Anne", what: "Tulip Semper Augustus", qty: 7 } )
-											 )
+	Block.first( 
+		{ from: "Ivan", to: "Carlos", what: "BTC", qty: 50 },
+		{ from: "Carlos", to: "Mike", what: "Test Transaction", qty: 100 }
+	  )
+	)
 	LEDGER << @b0
 	pp @b0
 	p "============================"
@@ -54,7 +57,9 @@ end
 def add_block
 	i = 1
 	loop do
-		instance_variable_set("@b#{i}", Block.next( (instance_variable_get("@b#{i-1}")), get_transactions_data))
+		miner_name = "MineroEjemplo"  # nombre del minero
+		instance_variable_set("@b#{i}", Block.next((instance_variable_get("@b#{i-1}")), get_transactions_data, miner_name))
+
 		LEDGER << instance_variable_get("@b#{i}")
 		p "============================"
 		pp instance_variable_get("@b#{i}")
